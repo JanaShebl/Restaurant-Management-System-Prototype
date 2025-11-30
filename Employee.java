@@ -3,12 +3,21 @@ public class Employee extends User {
     private String position;
     private double salary;
     private Date hireDate;
+    private List<Customer> managedCustomers;
     
     public Employee(String userId, String username, String password, String email, String phone, String employeeId) {
         super(userId, username, password, email, phone);
         this.employeeId = employeeId;
         this.position = "Staff";
         this.hireDate = new Date();
+        this.managedCustomers = new ArrayList<>();
+    }
+    public boolean addCustomer(Customer customer) {
+        return managedCustomers.add(customer);
+    }
+    
+    public List<Customer> getManagedCustomers() {
+        return new ArrayList<>(managedCustomers);
     }
     
     @Override
