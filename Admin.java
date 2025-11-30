@@ -1,26 +1,81 @@
 public class Admin extends User {
     private String adminId;
-    private List<String> privileges;
+    private String role;
+    private List<String> permissions;
+    
+    public Admin(String userId, String username, String password, String email, String phone, String adminId) {
+        super(userId, username, password, email, phone);
+        this.adminId = adminId;
+        this.role = "Administrator";
+        this.permissions = new ArrayList<>();
+    }
+    
+    @Override
+    public boolean login(String username, String password) {
+        return this.username.equals(username) && this.password.equals(password);
+    }
+    
+    @Override
+    public void logout() {
+        System.out.println("Admin logged out: " + username);
+    }
     
     // Employee Management
-    public boolean addEmployee(Employee emp) { }
-    public boolean deleteEmployee(String empId) { }
-    public boolean updateEmployee(Employee emp) { }
-    public List<Employee> listEmployees() { }
-    public Employee searchEmployee(String criteria) { }
+    public boolean addEmployee(Employee employee) {
+        // Implementation
+        return true;
+    }
+    
+    public boolean deleteEmployee(String employeeId) {
+        // Implementation
+        return true;
+    }
+    
+    public boolean updateEmployee(Employee employee) {
+        // Implementation
+        return true;
+    }
+    
+    public List<Employee> listEmployees() {
+        // Implementation
+        return new ArrayList<>();
+    }
     
     // Meal Management
-    public boolean addMeal(Meal meal) { }
-    public boolean deleteMeal(String mealId) { }
-    public boolean updateMeal(Meal meal) { }
-    public List<Meal> listMeals() { }
-    public Meal searchMeal(String criteria) { }
+    public boolean addMeal(Meal meal) {
+        // Implementation
+        return true;
+    }
+    
+    public boolean deleteMeal(String mealId) {
+        // Implementation
+        return true;
+    }
+    
+    public boolean updateMeal(Meal meal) {
+        // Implementation
+        return true;
+    }
+    
+    public List<Meal> listMeals() {
+        // Implementation
+        return new ArrayList<>();
+    }
     
     // Reports
-    public Report generateCustomerReport() { }
-    public Report generateEmployeeReport() { }
+    public String generateCustomerReport() {
+        // Implementation
+        return "Customer Report";
+    }
     
-    // Offers & Marketing
-    public boolean createSpecialOffer(Offer offer) { }
-    public boolean setupLoyaltyProgram(LoyaltyProgram program) { }
+    public String generateEmployeeReport() {
+        // Implementation
+        return "Employee Report";
+    }
+    
+    // Offers and Marketing
+    public boolean createSpecialOffer(String offerDetails) {
+        // Implementation
+        return true;
+    }
 }
