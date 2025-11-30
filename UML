@@ -5,42 +5,80 @@
 │ - username: String                                          │
 │ - password: String                                          │
 │ - email: String                                             │
+│ - phone: String                                             │
 ├─────────────────────────────────────────────────────────────┤
 │ + login(username, password): boolean                        │
 │ + logout(): void                                            │
-│ + updateInfo(): boolean                                     │
+│ + updateProfile(): boolean                                  │
 │ + changePassword(): boolean                                 │
 └─────────────────────────────────────────────────────────────┘
                                △
                                │
-             ┌─────────────────┼─────────────────┐
-             │                 │                 │
-             ▼                 ▼                 ▼
-    ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐
-    │    Admin        │ │    Employee     │ │    Customer     │
-    ├─────────────────┤ ├─────────────────┤ ├─────────────────┤
-    │ - adminId: String│ │ - empId: String │ │ - custId: String│
-    │ - privileges:    │ │ - position:     │ │ - loyaltyPoints:│
-    │   List<String>   │ │   String        │ │   int           │
-    ├─────────────────┤ ├─────────────────┤ ├─────────────────┤
-    │ + manageEmployees()│ + manageCustomers()│ + registerLoyalty()│
-    │ + manageMeals()  │ + makeOrder()     │ + viewProfile()   │
-    │ + generateReports()│ + cancelOrder()   │ + viewOffers()   │
-    │ + createOffers() │ + manageBilling() │ + viewOrders()    │
-    └─────────────────┘ └─────────────────┘ └─────────────────┘
-             △                       △
-             │                       │
-             └───────────────────────┘
-                       │
-                       ▼
-            ┌──────────────────────┐
-            │    Notification      │
-            ├──────────────────────┤
-            │ - notifId: String    │
-            │ - message: String    │
-            │ - type: String       │
-            │ - timestamp: Date    │
-            ├──────────────────────┤
-            │ + sendNotification() │
-            │ + setGiftAlert()     │
-            └──────────────────────┘
+               ┌───────────────┼───────────────┐
+               │                               │
+               ▼                               ▼
+    ┌─────────────────────┐         ┌─────────────────────┐
+    │       Admin         │         │      Employee       │
+    ├─────────────────────┤         ├─────────────────────┤
+    │ - adminId: String   │         │ - employeeId: String│
+    │ - role: String      │         │ - position: String  │
+    │ - permissions: List │         │ - salary: double    │
+    ├─────────────────────┤         │ - hireDate: Date    │
+    │ + manageEmployees() │         ├─────────────────────┤
+    │ + manageMeals()     │         │ + manageCustomers() │
+    │ + generateReports() │         │ + createOrder()     │
+    │ + createOffers()    │         │ + processBill()     │
+    └─────────────────────┘         │ + viewOrders()      │
+                                    └─────────────────────┘
+
+┌─────────────────────┐         ┌─────────────────────┐
+│      Customer       │         │       Meal          │
+├─────────────────────┤         ├─────────────────────┤
+│ - customerId: String│         │ - mealId: String    │
+│ - name: String      │         │ - name: String      │
+│ - address: String   │         │ - description: String│
+│ - loyaltyPoints: int│         │ - price: double     │
+│ - totalSpent: double│         │ - category: String  │
+├─────────────────────┤         │ - available: boolean│
+│ + register()        │         ├─────────────────────┤
+│ + viewOrders()      │         │ + updatePrice()     │
+│ + viewPoints()      │         │ + checkAvailability()│
+│ + redeemPoints()    │         │ + getCategory()     │
+└─────────────────────┘         └─────────────────────┘
+
+           │                               │
+           │ 1                             │ *
+           │                               │
+           ▼                               ▼
+┌─────────────────────┐         ┌─────────────────────┐
+│       Order         │         │        Bill         │
+├─────────────────────┤         ├─────────────────────┤
+│ - orderId: String   │         │ - billId: String    │
+│ - customer: Customer│         │ - order: Order      │
+│ - meals: List<Meal> │         │ - totalAmount: double│
+│ - orderDate: Date   │         │ - tax: double       │
+│ - status: String    │         │ - discount: double  │
+│ - orderType: String │         │ - paymentStatus: String│
+├─────────────────────┤         ├─────────────────────┤
+│ + calculateTotal()  │         │ + calculateTotal()  │
+│ + updateStatus()    │         │ + applyDiscount()   │
+│ + addMeal()         │         │ + generateInvoice() │
+│ + removeMeal()      │         │ + processPayment()  │
+└─────────────────────┘         └─────────────────────┘
+           │                               │
+           │                               │
+           ▼                               ▼
+┌─────────────────────┐         ┌─────────────────────┐
+│   Notification      │         │      Payment        │
+├─────────────────────┤         ├─────────────────────┤
+│ - notifId: String   │         │ - paymentId: String │
+│ - userId: String    │         │ - bill: Bill        │
+│ - message: String   │         │ - amount: double    │
+│ - type: String      │         │ - paymentMethod: String│
+│ - sentDate: Date    │         │ - paymentDate: Date │
+│ - isRead: boolean   │         │ - status: String    │
+├─────────────────────┤         ├─────────────────────┤
+│ + send()            │         │ + processPayment()  │
+│ + markAsRead()      │         │ + refund()          │
+│ + getNotifications()│         │ + validatePayment() │
+└─────────────────────┘         └─────────────────────┘
