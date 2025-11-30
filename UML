@@ -1,0 +1,46 @@
+┌─────────────────────────────────────────────────────────────┐
+│                         User                                │
+├─────────────────────────────────────────────────────────────┤
+│ - userId: String                                            │
+│ - username: String                                          │
+│ - password: String                                          │
+│ - email: String                                             │
+├─────────────────────────────────────────────────────────────┤
+│ + login(username, password): boolean                        │
+│ + logout(): void                                            │
+│ + updateInfo(): boolean                                     │
+│ + changePassword(): boolean                                 │
+└─────────────────────────────────────────────────────────────┘
+                               △
+                               │
+             ┌─────────────────┼─────────────────┐
+             │                 │                 │
+             ▼                 ▼                 ▼
+    ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐
+    │    Admin        │ │    Employee     │ │    Customer     │
+    ├─────────────────┤ ├─────────────────┤ ├─────────────────┤
+    │ - adminId: String│ │ - empId: String │ │ - custId: String│
+    │ - privileges:    │ │ - position:     │ │ - loyaltyPoints:│
+    │   List<String>   │ │   String        │ │   int           │
+    ├─────────────────┤ ├─────────────────┤ ├─────────────────┤
+    │ + manageEmployees()│ + manageCustomers()│ + registerLoyalty()│
+    │ + manageMeals()  │ + makeOrder()     │ + viewProfile()   │
+    │ + generateReports()│ + cancelOrder()   │ + viewOffers()   │
+    │ + createOffers() │ + manageBilling() │ + viewOrders()    │
+    └─────────────────┘ └─────────────────┘ └─────────────────┘
+             △                       △
+             │                       │
+             └───────────────────────┘
+                       │
+                       ▼
+            ┌──────────────────────┐
+            │    Notification      │
+            ├──────────────────────┤
+            │ - notifId: String    │
+            │ - message: String    │
+            │ - type: String       │
+            │ - timestamp: Date    │
+            ├──────────────────────┤
+            │ + sendNotification() │
+            │ + setGiftAlert()     │
+            └──────────────────────┘
