@@ -1,13 +1,7 @@
 public class Admin extends User {
-    private String adminId;
-    private String role;
-    private List<String> permissions;
     
-    public Admin(String userId, String username, String password, String email, String phone, String adminId) {
-        super(userId, username, password, email, phone);
-        this.adminId = adminId;
-        this.role = "Administrator";
-        this.permissions = new ArrayList<>();
+    public Admin(String userId, String username, String password) {
+        super(userId, username, password);
     }
     
     @Override
