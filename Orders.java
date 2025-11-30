@@ -5,14 +5,16 @@ public class Order {
     private Date orderDate;
     private String status;
     private String orderType; // DINE_IN, TAKEAWAY, DELIVERY
+    private Employee createdBy;
     
-    public Order(String orderId, Customer customer, List<Meal> meals) {
+    public Order(String orderId, Customer customer, List<Meal> meals,Employee createdBy) {
         this.orderId = orderId;
         this.customer = customer;
         this.meals = new ArrayList<>(meals);
         this.orderDate = new Date();
         this.status = "PENDING";
         this.orderType = "DINE_IN";
+        this.createdBy = createdBy;
     }
     
     public double calculateTotal() {
